@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fauna+One&display=swap');
+
+.h1-mod {
+  font: 400 60px/120% 'Playfair Display', serif
+}
+
+@media(max-width: 768px) {
+  .h1-mod {
+    font: 400 50px/120% 'Playfair Display', serif
+  }
+}
+
+.p-mod {
+  font: 500 16px/140% 'Fauna One', Georgia, serif;
+  max-width: 300px;
+  /* margin: top bottom left right */
+  /* color: #000; */
+}
