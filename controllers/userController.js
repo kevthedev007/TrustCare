@@ -95,7 +95,7 @@ const userController = {
         if(!user.rows[0]) return res.json('Email or password is wrong')
         
         //check if user is confirmed/verified
-        if(user.rows[0].is_verified == false) return res.json('Please confirm your email to login');
+        if(user.rows[0].is_verified == false) return res.json('Please check your email to verify your account');
 
         //check if password is correct
         const validPass = await bcrypt.compare(password, user.rows[0].password);
