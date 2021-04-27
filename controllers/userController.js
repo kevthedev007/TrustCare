@@ -7,8 +7,8 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.GMAIL_USER, // generated ethereal user
-      pass: process.env.GMAIL_PASS, // generated ethereal password
+      user: 'themocktherapysite@gmail.com', // generated ethereal user
+      pass: ' mocktherapy', // generated ethereal password
     },
     tls: {
         rejectUnauthorized: false
@@ -42,7 +42,7 @@ const userController = {
         const hashPassword = await bcrypt.hash(password, salt);
 
         //Create confirmation code with email token
-        const token = jwt.sign({email: email}, process.env.SECRET_KEY);
+        const token = jwt.sign({email: email}, 'sasuke007');
        
         //save to database
         try {
@@ -99,7 +99,7 @@ const userController = {
         if(!validPass)  return res.json('Invalid password');
         
         //assign jwt token
-        const token = jwt.sign({_id: user.rows[0].user_id }, process.env.SECRET_KEY);
+        const token = jwt.sign({_id: user.rows[0].user_id }, 'sasuke007');
         console.log(token)
         res.cookie('auth_token', token, {maxAge: 3600 * 1000 * 24 * 365, httpOnly: false});
         res.send('logged in')
