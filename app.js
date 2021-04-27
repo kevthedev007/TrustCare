@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 //adding routes
+app.use('/', (req, res) => {
+    res.send('welcome to mocktherapy official api')
+})
 app.use('/user/', userRoutes);
 app.use('/counselor/', counselorRoutes);
 
