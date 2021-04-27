@@ -56,7 +56,7 @@ const userController = {
                 html: ` <h1>Email Confirmation</h1>
                         <h2>Hello ${username}</h2>
                         <p>Thank you for subscribing. Please confirm email by clicking on the link below</p>
-                        <a href=http://localhost:3000/user/confirmation/${token}>Click here</a>`, // html body
+                        <a href=https://mocktherapy.herokuapp.com/user/confirmation/${token}>Click here</a>`, // html body
               };
         
               transporter.sendMail(mailTransport, (error, info) => {
@@ -77,7 +77,7 @@ const userController = {
 
             //if user exist, change isVerified to true
             const isVerified = await pool.query('UPDATE users SET is_verified = $1 WHERE confirmation_code = $2', [true, confirmationCode ])
-            res.json('account verified');
+            res.json('http://localhost:3000/loginClient');
         } catch(err) {
             res.send(err)
         }
