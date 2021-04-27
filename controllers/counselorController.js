@@ -95,7 +95,7 @@ const counselorController = {
         if(!validPass)  return res.json('Invalid password')
 
         //assign jwt token
-        const token = jwt.sign({_id: user.rows[0]._id }, 'sasuke007');
+        const token = jwt.sign({_id: user.rows[0].counselor_id }, 'sasuke007');
         console.log(token)
         res.cookie('auth_token', token, {maxAge: 3600 * 1000 * 24 * 365, httpOnly: false});
         res.send('logged in')
