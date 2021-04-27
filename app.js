@@ -25,8 +25,4 @@ app.use('/', (req, res) => {
 app.use('/user/', userRoutes);
 app.use('/counselor/', counselorRoutes);
 
-app.use('/', (req, res) => {
-    res.send('hello world')
-})
-
 app.listen(process.env.PORT || 3000, () => console.log('server started'))
