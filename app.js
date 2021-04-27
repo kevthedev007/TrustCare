@@ -12,7 +12,6 @@ const app = express();
 const userRoutes = require('./routes/userRouter.js')
 const counselorRoutes = require('./routes/counselorRouter')
 
-
 //adding middlewares
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -21,4 +20,8 @@ app.use(bodyParser.json());
 app.use('/user/', userRoutes);
 app.use('/counselor/', counselorRoutes);
 
-app.listen(3000, () => console.log('server started'))
+app.use('/', (req, res) => {
+    res.send('hello world')
+})
+
+app.listen(process.env.PORT || 3000, () => console.log('server started'))

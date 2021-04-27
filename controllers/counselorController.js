@@ -41,7 +41,7 @@ const counselorController = {
 
         //save to database
         try {
-            const user = await pool.query('INSERT INTO counselors (firstname, lastname, email, phoneNo, aboutMe, password, confirmation_code) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [firstname, lastname, email, phoneNo, aboutMe, hashPassword, token]);
+            const user = await pool.query('INSERT INTO counselors (firstname, lastname, email, phoneNo, aboutMe, password, confirmation_code) VALUES ($1, $2, $3, $4, $5, $6, $7)', [firstname, lastname, email, phoneNo, aboutMe, hashPassword, token]);
 
             //SENDING ACTIVATION MAIL
             let mailTransport = {
@@ -49,7 +49,7 @@ const counselorController = {
                 to: email, // list of receivers
                 subject: "Account Activation", // Subject line
                 html: ` <h1>Email Confirmation</h1>
-                        <h2>Hello ${first_name}</h2>
+                        <h2>Hello ${firstname}</h2>
                         <p>Thank you for subscribing. Please confirm email by clicking on the link below</p>
                         <a href=http://localhost:3000/counselor/confirmation/${token}>Click here</a>`, // html body
               };

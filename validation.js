@@ -19,7 +19,7 @@ const registerValidation = (data) => {
 const loginValidation = (data) => {
     const schema = {
         username: Joi.string()
-                  .min(5)
+                  .min(6)
                   .required(),
         password: Joi.string()
                   .min(6)
@@ -33,8 +33,8 @@ const counselorValidation = (data) => {
         firstname: Joi.string().required(),
         lastname: Joi.string().required(),
         email: Joi.string().email().required(),
-        password: Joi.string().min(6).required(),
-        password2: Joi.string().min(6).required(),
+        password: Joi.string().min(7).required(),
+        password2: Joi.string().min(7).required(),
         phoneNo: Joi.string().min(11).max(14).required(),
         aboutMe: Joi.string().required()
     };

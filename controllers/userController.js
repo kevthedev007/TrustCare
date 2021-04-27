@@ -28,8 +28,12 @@ const userController = {
 
         //check if email exists in database already
         const checkEmail = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-        if(checkEmail.rows[0]) return res.json('username already exists');
-        
+        if(checkEmail.rows[0]) return res.json('email already exists');
+
+        //check if username exists
+        const checkUsername = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+        if(checkUsername.rows[0]) return res.json('username already exists');
+       
         //confirm password
         if(password !== password2) return res.json('password does not match')
 
@@ -39,10 +43,10 @@ const userController = {
 
         //Create confirmation code with email token
         const token = jwt.sign({email: email}, process.env.SECRET_KEY);
-
+       
         //save to database
         try {
-            const savedUser = await pool.query('INSERT INTO users (username, email, password, confirmation_code) VALUES ($1, $2)', [username, email, hashPassword, token]);
+            const savedUser = await pool.query('INSERT INTO users (username, email, password, confirmation_code) VALUES ($1, $2, $3, $4)', [username, email, hashPassword, token]);
 
              //SENDING ACTIVATION MAIL
              let mailTransport = {
