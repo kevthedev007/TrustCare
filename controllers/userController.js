@@ -77,7 +77,7 @@ const userController = {
 
             //if user exist, change isVerified to true
             const isVerified = await pool.query('UPDATE users SET is_verified = $1 WHERE confirmation_code = $2', [true, confirmationCode ])
-            res.json('http://localhost:3000/loginClient');
+            res.redirect('http://localhost:3000/loginClient');
         } catch(err) {
             res.send(err)
         }
