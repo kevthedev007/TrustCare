@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 
 if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
@@ -13,6 +14,7 @@ const userRoutes = require('./routes/userRouter.js')
 const counselorRoutes = require('./routes/counselorRouter')
 
 //adding middlewares
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
