@@ -72,7 +72,7 @@ const counselorController = {
 
             //if user exist, change isVerified to true
             const isVerified = await pool.query('UPDATE counselors SET is_verified = $1 WHERE confirmation_code = $2', [true, confirmationCode ])
-            res.redirect('http://localhost:3000/loginClient');
+            res.redirect('http://localhost:3000/loginTherapist');
         } catch(err) {
             res.send(err)
         }
