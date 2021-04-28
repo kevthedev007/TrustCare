@@ -46,7 +46,7 @@ const userController = {
 
              //SENDING ACTIVATION MAIL
              let mailTransport = {
-                from: '"noreply@gmail.com" <themocktherapysite@gmail.com>', // sender address
+                from: '"noreply" <themocktherapysite@gmail.com>', // sender address
                 to: email, // list of receivers
                 subject: "Account Activation", // Subject line
                 html: ` <h1>Email Confirmation</h1>
