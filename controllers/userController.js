@@ -73,7 +73,7 @@ const userController = {
 
             //if user exist, change isVerified to true
             const isVerified = await pool.query('UPDATE users SET is_verified = $1 WHERE confirmation_code = $2', [true, confirmationCode ])
-            res.redirect('http://localhost:3000/loginClient');
+            res.redirect('http://localhost:3000/login');
         } catch(err) {
             res.send(err)
         }
@@ -108,7 +108,7 @@ const userController = {
         
         //check email
         const checkMail = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-        if(!checkMail.rows[0]) return res.json('Account does not exist')
+        if(!checkMail.rows[0]) return res.json('Account does not exist');
 
         //user exists and now create a one-time link valid for 10 minutes
         const secret = checkMail.rows[0].password + 'sasuke007';
@@ -175,7 +175,7 @@ const userController = {
 
             //insert new password into database
             const newPassword = await pool.query('UPDATE users SET password = $1 WHERE user_id = $2', [hashedPassword, id]);
-            res.redirect('http://localhost:3000/loginClient')
+            res.redirect('http://localhost:3000/login')
         } catch(err) {
             res.send(err);
         }
@@ -186,6 +186,9 @@ const userController = {
 
         const mailExist = await pool.query('SELECT * FROM users WHERE email = $1', [email])
         if(!mailExist.rows[0]) return res.json('Account does not exist');
+
+        //if account is already verified
+        if(!mailExist.rows[0].is_verified === true) return res.json('Account already verified')
 
         //Create confirmation code with email token
         const token = jwt.sign({email: email}, 'sasuke007');
