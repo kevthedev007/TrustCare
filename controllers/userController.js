@@ -188,7 +188,7 @@ const userController = {
         if(!mailExist.rows[0]) return res.json('Account does not exist');
 
         //if account is already verified
-        if(!mailExist.rows[0].is_verified === true) return res.json('Account already verified')
+        if(mailExist.rows[0].is_verified === true) return res.json('Account already verified')
 
         //Create confirmation code with email token
         const token = jwt.sign({email: email}, 'sasuke007');
