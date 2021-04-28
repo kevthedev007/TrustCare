@@ -155,7 +155,7 @@ const userController = {
         }
     },
 
-    change_password: (req, res) => {
+    change_password: async(req, res) => {
         const {id, token} = req.params;
         const {password, password2} = req.body;
 
