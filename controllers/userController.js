@@ -103,7 +103,7 @@ const userController = {
         res.send('logged in')
     },
 
-    forgot_password: function async(req, res) {
+    forgot_password: async(req, res) => {
         const email = req.body.email.toLowerCase();
         
         //check email
