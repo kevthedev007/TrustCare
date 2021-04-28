@@ -182,7 +182,7 @@ const userController = {
     },
 
     resend_mail: async(req, res) => {
-        const email = req.body;
+        const email = req.body.email.toLowerCase();
 
         const mailExist = await pool.query('SELECT * FROM users WHERE email = $1', [email])
         if(!mailExist.rows[0]) return res.json('Account does not exist');
