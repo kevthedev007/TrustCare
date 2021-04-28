@@ -24,7 +24,7 @@ const userController = {
         const email = req.body.email.toLowerCase();
         const password = req.body.password.toLowerCase();
         const password2 = req.body.password2.toLowerCase();
-        const role = req.body.role.toLowerCase();
+        const role = req.body.role.toString().toLowerCase();
 
         //check if email exists in database already
         const checkEmail = await pool.query('SELECT * FROM users WHERE email = $1', [email]);

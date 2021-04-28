@@ -9,7 +9,7 @@ const registerValidation = (data) => {
         password2: Joi.string()
                   .min(7)
                   .required(),
-        role: Joi.string()
+        role: Joi.array()
     };
     return Joi.validate(data, schema)
 };
