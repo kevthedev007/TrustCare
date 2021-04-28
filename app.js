@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use('/home', (req, res) => {
     res.send('welcome to mocktherapy official api')
 })
-app.use('/user/', userRoutes);
+app.use('/user/', authRoutes);
 
 
 app.listen(process.env.PORT || 3000, () => console.log('server started'))
