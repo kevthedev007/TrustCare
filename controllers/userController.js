@@ -21,19 +21,15 @@ const userController = {
         const { error } = registerValidation(req.body);
         if(error) return res.json(error.details[0].message);
 
-        const username = req.body.username.toLowerCase();
         const email = req.body.email.toLowerCase();
         const password = req.body.password.toLowerCase();
         const password2 = req.body.password2.toLowerCase();
+        const role = req.body.role.toLowerCase();
 
         //check if email exists in database already
         const checkEmail = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         if(checkEmail.rows[0]) return res.json('email already exists');
-
-        //check if username exists
-        const checkUsername = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-        if(checkUsername.rows[0]) return res.json('username already exists');
-       
+   
         //confirm password
         if(password !== password2) return res.json('password does not match')
 
@@ -46,7 +42,7 @@ const userController = {
        
         //save to database
         try {
-            const savedUser = await pool.query('INSERT INTO users (username, email, password, confirmation_code) VALUES ($1, $2, $3, $4)', [username, email, hashPassword, token]);
+            const savedUser = await pool.query('INSERT INTO users (email, password, role, confirmation_code) VALUES ($1, $2, $3, $4)', [email, hashPassword, role, token]);
 
              //SENDING ACTIVATION MAIL
              let mailTransport = {
@@ -54,7 +50,7 @@ const userController = {
                 to: email, // list of receivers
                 subject: "Account Activation", // Subject line
                 html: ` <h1>Email Confirmation</h1>
-                        <h2>Hello ${username}</h2>
+                        <h2>Hello ${email}</h2>
                         <p>Thank you for subscribing. Please confirm email by clicking on the link below</p>
                         <a href=https://mocktherapy.herokuapp.com/user/confirmation/${token}>Click here</a>`, // html body
               };

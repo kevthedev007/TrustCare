@@ -10,8 +10,7 @@ if(process.env.NODE_ENV !== 'production') {
 const app = express();
 
 //importing routes
-const userRoutes = require('./routes/userRouter.js')
-const counselorRoutes = require('./routes/counselorRouter')
+const authRoutes = require('./routes/authRoute')
 
 //adding middlewares
 app.use(cors())
@@ -23,7 +22,6 @@ app.use('/home', (req, res) => {
     res.send('welcome to mocktherapy official api')
 })
 app.use('/user/', userRoutes);
-app.use('/counselor/', counselorRoutes);
 
 
 app.listen(process.env.PORT || 3000, () => console.log('server started'))

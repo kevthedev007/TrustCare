@@ -2,8 +2,8 @@ const router = require('express').Router();
 const userController = require('../controllers/userController');
 const verify = require('../verifytoken')
 
-router.post('/register', userController.postRegister);
-router.post('/login', userController.postLogin);
+router.post('/signup', userController.postRegister);
+router.post('/signin', userController.postLogin);
 router.get('/confirmation/:token', userController.Confirmation)
 router.get('/logout', userController.logout);
 router.get('/post', verify, (req, res) => {
