@@ -164,7 +164,7 @@ const userController = {
         if(!user.rows[0]) return res.json('Invalid user');
 
         //compare passwords
-        if(password == password2) return res.json('Password does not match');
+        if(password !== password2) return res.json('Password does not match');
 
         const secret = user.rows[0].password + 'sasuke007';
         try {
