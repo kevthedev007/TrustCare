@@ -9,7 +9,7 @@ router.get('/logout', userController.logout);
 
 //auth for reset password
 router.post('/forget-password', userController.forgot_password);
-// router.get('/reset-password/:id/:token', userController.reset_password);
+router.get('/reset-password/:id/:token', userController.reset_password);
 router.post('/reset-password/:id/:token', userController.change_password)
 
 //auth for resend confirmation mail
