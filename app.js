@@ -13,20 +13,20 @@ const app = express();
 const authRoutes = require('./routes/authRoute');
 
 //adding middlewares
-var corsOption = {
-    origin: '*',
-    optionsSuccessStatus: 200,
-    methods: "GET, POST"
-}
+// var corsOption = {
+//     origin: '*',
+//     optionsSuccessStatus: 200,
+//     methods: "GET, POST"
+// }
 
-app.use(cors(corsOption))
+// app.use(cors(corsOption))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
