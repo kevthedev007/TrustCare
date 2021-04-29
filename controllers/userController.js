@@ -128,7 +128,7 @@ const userController = {
         
               transporter.sendMail(mailTransport, (error, info) => {
                   if(error) console.log(error);
-                  res.send('Pasword reset link has been sent to your email')
+                  res.send('Password reset link has been sent to your email')
               });
 
             } catch(err) {
@@ -149,7 +149,7 @@ const userController = {
         const secret = user.rows[0].password + 'sasuke007';
         try {
             const payload = jwt.verify(token, secret);
-            res.redirect('http://localhost:3000/resetPassword/${id}/${token}')
+            res.redirect(`http://localhost:3000/resetPassword/${id}/${token}`)
         } catch(err) {
            res.send(err)
         }
