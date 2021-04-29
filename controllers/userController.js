@@ -123,7 +123,7 @@ const userController = {
                 html: ` <h1>Password Reset</h1>
                         <h2>Hello ${email}</h2>
                         <p>Please click on the one-time link blow to reset your password. link is valid for 10 minutes</p>
-                        <a href=https://mocktherapy.herokuapp.com/user/reset-password/${checkMail.rows[0].user_id }/${token}>Click here</a>`, // html body
+                        <a href=http://localhost:3000/resetPassword/${checkMail.rows[0].user_id }/${token}>Click here</a>`, // html body
               };
         
               transporter.sendMail(mailTransport, (error, info) => {
@@ -138,22 +138,22 @@ const userController = {
 
     },
 
-    reset_password: async(req, res) => {
-        const {id, token} = req.params;
+    // reset_password: async(req, res) => {
+    //     const {id, token} = req.params;
 
-        //check if this id exists in database
-        const user = await pool.query('SELECT * FROM users where user_id = $1', [id]);
-        if(!user.rows[0]) return res.json('Invalid user');
+    //     //check if this id exists in database
+    //     const user = await pool.query('SELECT * FROM users where user_id = $1', [id]);
+    //     if(!user.rows[0]) return res.json('Invalid user');
 
-        //for valid user with id
-        const secret = user.rows[0].password + 'sasuke007';
-        try {
-            const payload = jwt.verify(token, secret);
-            res.redirect(`http://localhost:3000/resetPassword/${id}/${token}`)
-        } catch(err) {
-           res.send(err)
-        }
-    },
+    //     //for valid user with id
+    //     const secret = user.rows[0].password + 'sasuke007';
+    //     try {
+    //         const payload = jwt.verify(token, secret);
+    //         res.redirect(`http://localhost:3000/resetPassword/${id}/${token}`)
+    //     } catch(err) {
+    //        res.send(err)
+    //     }
+    // },
 
     change_password: async(req, res) => {
         const {id, token} = req.params;
