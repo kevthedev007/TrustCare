@@ -13,7 +13,7 @@ const app = express();
 const authRoutes = require('./routes/authRoute');
 
 //adding middlewares
-app.use(cors(corsOption))
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
