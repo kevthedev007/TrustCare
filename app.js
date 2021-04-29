@@ -23,6 +23,11 @@ app.use(cors(corsOption))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 //adding routes
 app.use('/home', (req, res) => {
     res.send('welcome to mocktherapy official api')
