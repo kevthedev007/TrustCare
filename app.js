@@ -11,15 +11,8 @@ const app = express();
 
 //importing routes
 const authRoutes = require('./routes/authRoute');
-const { METHODS } = require('http');
 
 //adding middlewares
-var corsOption = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200,
-    methods: "GET, POST"
-}
-
 app.use(cors(corsOption))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
