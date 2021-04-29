@@ -19,7 +19,7 @@ const authRoutes = require('./routes/authRoute');
 //     methods: "GET, POST"
 // }
 
-// app.use(cors(corsOption))
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
