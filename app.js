@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 app.use('/home', (req, res) => {
     res.send('welcome to mocktherapy official api')
 })
-app.use('/user/', authRoutes);
+app.use('/auth/', authRoutes);
 
 
 app.listen(process.env.PORT || 3000, () => console.log('server started'))
