@@ -1,19 +1,19 @@
 const router = require('express').Router();
-const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 const verify = require('../verifytoken')
 
-router.post('/signup', userController.postRegister);
-router.post('/signin', userController.postLogin);
-router.get('/confirmation/:token', userController.Confirmation);
-router.get('/logout', userController.logout);
+router.post('/signup', authController.postRegister);
+router.post('/signin', authController.postLogin);
+router.get('/confirmation/:token',authController.Confirmation);
+router.get('/logout',authController.logout);
 
 //auth for reset password
-router.post('/forget-password', userController.forgot_password);
-router.get('/reset-password/:id/:token', userController.reset_password);
-router.post('/change-password/:id/:token', userController.change_password)
+router.post('/forget-password',authController.forgot_password);
+router.get('/reset-password/:id/:token',authController.reset_password);
+router.post('/change-password/:id/:token',authController.change_password)
 
 //auth for resend confirmation mail
-router.post('/resend-mail', userController.resend_mail);
+router.post('/resend-mail',authController.resend_mail);
 
 
 
