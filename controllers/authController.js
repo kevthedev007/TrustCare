@@ -7,8 +7,8 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: 'themocktherapysite@gmail.com', // generated ethereal user
-      pass: ' mocktherapy', // generated ethereal password
+      user: GMAIL_USER, // generated ethereal user
+      pass: GMAIL_PASS, // generated ethereal password
     },
     tls: {
         rejectUnauthorized: false
@@ -38,7 +38,7 @@ const userController = {
         const hashPassword = await bcrypt.hash(password, salt);
 
         //Create confirmation code with email token
-        const token = jwt.sign({email: email}, 'sasuke007');
+        const token = jwt.sign({email: email}, process.env.SECRET_KEY);
        
         //save to database
         try {
@@ -80,8 +80,6 @@ const userController = {
     },
 
     postLogin: async function(req, res) {
-        // const { error } = loginValidation(req.body);
-        // if(error) return res.status(400).send(error.details[0].message);
 
         const email = req.body.email.toLowerCase();
         const password = req.body.password;
@@ -98,9 +96,10 @@ const userController = {
         if(!validPass)  return res.json('Invalid password');
         
         //assign jwt token
-        const token = jwt.sign({_id: user.rows[0].user_id }, 'sasuke007');
-        res.cookie('auth_token', token, {maxAge: 3600 * 1000 * 24 * 365, httpOnly: false});
-        res.send('logged in')
+        const token = jwt.sign({_id: user.rows[0].user_id }, process.env.SECRET_KEY);
+        const role = user.rows[0].role;
+
+        res.json({token:token, user: user.rows[0]});
     },
 
     forgot_password: async(req, res) => {
@@ -111,7 +110,7 @@ const userController = {
         if(!checkMail.rows[0]) return res.json('Account does not exist');
 
         //user exists and now create a one-time link valid for 10 minutes
-        const secret = checkMail.rows[0].password + 'sasuke007';
+        const secret = checkMail.rows[0].password + process.env.SECRET_KEY;
         const token = jwt.sign({_id: checkMail.rows[0].user_id }, secret, {expiresIn: '10m'});
 
         //send mail
@@ -146,10 +145,10 @@ const userController = {
         if(!user.rows[0]) return res.json('Invalid user');
 
         //for valid user with id
-        const secret = user.rows[0].password + 'sasuke007';
+        const secret = user.rows[0].password + process.env.SECRET_KEY;
         try {
             const payload = jwt.verify(token, secret);
-            res.redirect(`http://localhost:3000/resetPassword/${id}/${token}`)
+            res.redirect(`http://localhost:3000/reset-password/${id}/${token}`)
         } catch(err) {
            res.send(err)
         }
@@ -166,7 +165,7 @@ const userController = {
         //compare passwords
         if(password !== password2) return res.json('Password does not match');
 
-        const secret = user.rows[0].password + 'sasuke007';
+        const secret = user.rows[0].password + process.env.SECRET_KEY;
         try {
             const payload = jwt.verify(token, secret);
             //encrpyt password
@@ -191,7 +190,7 @@ const userController = {
         if(mailExist.rows[0].is_verified === true) return res.json('Your account has already been verified')
 
         //Create confirmation code with email token
-        const token = jwt.sign({email: email}, 'sasuke007');
+        const token = jwt.sign({email: email}, process.env.SECRET_KEY);
 
         try {
             const changeCODE = await pool.query('UPDATE users SET confirmation_code = $1 WHERE email = $2', [token, email])
@@ -216,10 +215,7 @@ const userController = {
         }
     },
 
-    logout: function(req, res) {
-        res.clearCookie('auth_token')
-        res.send('logout successful!')
-    }
+   
 }
 
 

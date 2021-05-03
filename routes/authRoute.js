@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const authController = require('../controllers/authController');
-const verify = require('../verifytoken')
 
 router.post('/signup', authController.postRegister);
 router.post('/signin', authController.postLogin);
@@ -16,10 +15,6 @@ router.post('/change-password/:id/:token',authController.change_password)
 router.post('/resend-mail',authController.resend_mail);
 
 
-
-router.get('/post', verify, (req, res) => {
-    res.send('You can access this data')
-})
 
 
 module.exports = router;

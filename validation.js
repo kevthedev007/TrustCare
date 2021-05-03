@@ -26,19 +26,35 @@ const loginValidation = (data) => {
     return Joi.validate(data, schema)
 };
 
-const counselorValidation = (data) => {
+const therapistValidation = (data) => {
     const schema = {
         firstname: Joi.string().required(),
         lastname: Joi.string().required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().min(7).required(),
-        password2: Joi.string().min(7).required(),
-        phoneNo: Joi.string().min(11).max(14).required(),
-        aboutMe: Joi.string().required()
+        age: Joi.string().required(),
+        gender: Joi.string().required(),
+        phoneNo: Joi.string().required(),
+        gender_preference: Joi.string().required(),
+        speciality: Joi.string().required(),
+        state_of_residence: Joi.string().required(),
+        client_limit: Joi.string().required()
+    };
+    return Joi.validate(data, schema)
+}
+
+const clientValidation = (data) => {
+    const schema = {
+        firstname: Joi.string(),
+        lastname: Joi.string(),
+        age: Joi.string().required(),
+        gender: Joi.string().required(),
+        gender_preference: Joi.string().required(),
+        issue: Joi.string().required(),
+        previous_therapy: Joi.string().required()
     };
     return Joi.validate(data, schema)
 }
 
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
-module.exports.counselorValidation = counselorValidation;
+module.exports.therapistValidation = therapistValidation;
+module.exports.clientValidation = clientValidation;
