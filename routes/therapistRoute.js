@@ -2,7 +2,7 @@ const router = require('express').Router();
 const therapistController = require('../controllers/therapistController');
 const { verify, isTherapist } = require('../verifytoken');
 
-router.post('/therapist-survey', [verify, isTherapist], therapistController.therapistSurvey)
+router.post('/therapist-survey', therapistController.therapistSurvey)
 
 
 
