@@ -18,7 +18,7 @@ const clientController = {
     },
 
     sendTherapists: async(req, res) => {
-        const match = await pool.query
+        
 
     }
 
