@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const pool = require('./models/queries');
 
-veify = (req, res, next) => {
+verify = (req, res, next) => {
     const token = req.headers["access-token"];
     if(!token) return res.status(401).send('Access Denied!')
     try {
@@ -26,4 +26,6 @@ isTherapist = async(req, res, next) => {
 };
 
 
-module.exports = {verify, isClient, isTherapist};
+module.exports.verify = verify;
+module.exports.isClient = isClient;
+module.exports.isTherapist = isTherapist;
