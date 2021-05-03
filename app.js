@@ -11,8 +11,8 @@ const app = express();
 
 //importing routes
 const authRoutes = require('./routes/authRoute');
-const clientRoutes = require('./routes/clientRoute');
-const therapistRoutes = require('./routes/therapistRoute')
+// const clientRoutes = require('./routes/clientRoute');
+// const therapistRoutes = require('./routes/therapistRoute')
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}));
@@ -42,8 +42,8 @@ app.use('/home', (req, res) => {
     res.send('welcome to mocktherapy official api')
 })
 app.use('/auth/', authRoutes);
-app.use('/client/', clientRoutes);
-app.use('/therapist/', therapistRoutes);
+// app.use('/client/', clientRoutes);
+// app.use('/therapist/', therapistRoutes);
 
 
 app.listen(process.env.PORT || 3000, () => console.log('server started'))
