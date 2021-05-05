@@ -98,14 +98,12 @@ const userController = {
         //assign jwt token
         const token = jwt.sign({_id: user.rows[0].user_id }, 'sasuke007');
 
-        let details = user.rows.map(user => {
-                return {
-                    email: user.email,
-                    role: user.role,
-                    survey: user.survey
-                }
-            })
-    
+        let details = {
+            email: user.rows[0].email,
+            role: user.rows[0].role,
+            survey: user.rows[0].survey
+        }
+              
         res.json({user: details, token: token});
     },
 
