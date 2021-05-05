@@ -25,7 +25,7 @@ const therapistController = {
         }
         res.json({therapistDetails})
     }
-    }
+}
 
 
 
