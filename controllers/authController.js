@@ -38,7 +38,7 @@ const userController = {
         const hashPassword = await bcrypt.hash(password, salt);
 
         //Create confirmation code with email token
-        const token = jwt.sign({email: email}, process.env.SECRET_KEY);
+        const token = jwt.sign({email: email}, 'sasuke007');
        
         //save to database
         try {
@@ -96,7 +96,7 @@ const userController = {
         if(!validPass)  return res.json('Invalid password');
         
         //assign jwt token
-        const token = jwt.sign({_id: user.rows[0].user_id }, process.env.SECRET_KEY);
+        const token = jwt.sign({_id: user.rows[0].user_id }, 'sasuke007');
     
         res.json({user: user.rows[0].map(user => {
             return {
@@ -115,7 +115,7 @@ const userController = {
         if(!checkMail.rows[0]) return res.json('Account does not exist');
 
         //user exists and now create a one-time link valid for 10 minutes
-        const secret = checkMail.rows[0].password + process.env.SECRET_KEY;
+        const secret = checkMail.rows[0].password + 'sasuke007';
         const token = jwt.sign({_id: checkMail.rows[0].user_id }, secret, {expiresIn: '10m'});
 
         //send mail
@@ -150,7 +150,7 @@ const userController = {
         if(!user.rows[0]) return res.json('Invalid user');
 
         //for valid user with id
-        const secret = user.rows[0].password + process.env.SECRET_KEY;
+        const secret = user.rows[0].password + 'sasuke007';
         try {
             const payload = jwt.verify(token, secret);
             res.redirect(`http://localhost:3000/reset-password/${id}/${token}`)
@@ -170,7 +170,7 @@ const userController = {
         //compare passwords
         if(password !== password2) return res.json('Password does not match');
 
-        const secret = user.rows[0].password + process.env.SECRET_KEY;
+        const secret = user.rows[0].password + 'sasuke007';
         try {
             const payload = jwt.verify(token, secret);
             //encrpyt password
@@ -195,7 +195,7 @@ const userController = {
         if(mailExist.rows[0].is_verified === true) return res.json('Your account has already been verified')
 
         //Create confirmation code with email token
-        const token = jwt.sign({email: email}, process.env.SECRET_KEY);
+        const token = jwt.sign({email: email}, 'sasuke007');
 
         try {
             const changeCODE = await pool.query('UPDATE users SET confirmation_code = $1 WHERE email = $2', [token, email])
