@@ -97,9 +97,14 @@ const userController = {
         
         //assign jwt token
         const token = jwt.sign({_id: user.rows[0].user_id }, process.env.SECRET_KEY);
-        const role = user.rows[0].role;
-
-        res.json({token:token, user: user.rows[0]});
+    
+        res.json({user: user.rows[0].map(user => {
+            return {
+                email: user.email,
+                role: user.role,
+                survey: user.survey
+            }
+        }), token: token});
     },
 
     forgot_password: async(req, res) => {
