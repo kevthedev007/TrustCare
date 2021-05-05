@@ -39,7 +39,7 @@ const clientController = {
         if(checkTherapist.rows[0]) {
             const therapistID = checkTherapist.rows[0].therapist_id;
             const getName = await pool.query('SELECT firstname, lastname FROM therapists WHERE user_id = $1', [therapistID]);
-            res.json({clientDetails, getName})
+            res.json({client: clientDetails, therapist: getName})
         }
         res.json({clientDetails})
     }
