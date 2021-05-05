@@ -98,15 +98,15 @@ const userController = {
         //assign jwt token
         const token = jwt.sign({_id: user.rows[0].user_id }, 'sasuke007');
 
-        // let details = user.rows[0].map(user => {
-        //         return {
-        //             email: user.email,
-        //             role: user.role,
-        //             survey: user.survey
-        //         }
-        //     })
+        let details = user.rows.map(user => {
+                return {
+                    email: user.email,
+                    role: user.role,
+                    survey: user.survey
+                }
+            })
     
-        res.json(token);
+        res.json({user: details, token: token});
     },
 
     forgot_password: async(req, res) => {
