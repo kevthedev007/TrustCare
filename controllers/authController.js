@@ -52,7 +52,7 @@ const userController = {
                 html: ` <h1>Email Confirmation</h1>
                         <h2>Hello ${email}</h2>
                         <p>Thank you for subscribing. Please confirm email by clicking on the link below</p>
-                        <a href=https://mocktherapy.herokuapp.com/user/confirmation/${token}>Click here</a>`, // html body
+                        <a href=https://mocktherapy.herokuapp.com/auth/confirmation/${token}>Click here</a>`, // html body
               };
         
               transporter.sendMail(mailTransport, (error, info) => {
@@ -127,7 +127,7 @@ const userController = {
                 html: ` <h1>Password Reset</h1>
                         <h2>Hello ${email}</h2>
                         <p>Please click on the one-time link blow to reset your password. link is valid for 10 minutes</p>
-                        <a href=https://mocktherapy.herokuapp.com/user/reset-password/${checkMail.rows[0].user_id }/${token}>Click here</a>`, // html body
+                        <a href=https://mocktherapy.herokuapp.com/auth/reset-password/${checkMail.rows[0].user_id }/${token}>Click here</a>`, // html body
               };
         
               transporter.sendMail(mailTransport, (error, info) => {
@@ -207,7 +207,7 @@ const userController = {
                 html: ` <h1>Email Confirmation</h1>
                         <h2>Hello ${email}</h2>
                         <p>Thank you for subscribing. Please confirm email by clicking on the link below</p>
-                        <a href=https://mocktherapy.herokuapp.com/user/confirmation/${token}>Click here</a>`, // html body
+                        <a href=https://mocktherapy.herokuapp.com/auth/confirmation/${token}>Click here</a>`, // html body
               };
         
               transporter.sendMail(mailTransport, (error, info) => {
