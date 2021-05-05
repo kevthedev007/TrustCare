@@ -106,7 +106,7 @@ const userController = {
                 }
             })
     
-        res.send('successful');
+        res.json('successful');
     },
 
     forgot_password: async(req, res) => {
