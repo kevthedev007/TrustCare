@@ -19,7 +19,7 @@ const clientController = {
     },
 
     sendTherapists: async(req, res) => {
-        const match = await pool.query('SELECT therapist.user_id, therapist.firstname, therapist.lastname, therapist.gender, therapist.specialty, therapist.about_me, therapist.no_of_clients FROM clients JOIN therapists ON client.gender_preference = therapist.gender_preference AND client.specialty = ANY(therapist.specialty) WHERE client.user_id = $1', [req.user._id]);
+        const match = await pool.query('SELECT therapist.user_id, therapist.firstname, therapist.lastname, therapist.d_o_b, therapist.gender, therapist.specialty, therapist.about_me, therapist.no_of_clients FROM clients JOIN therapists ON client.gender_preference = therapist.gender_preference AND client.specialty = ANY(therapist.specialty) WHERE client.user_id = $1', [req.user._id]);
         res.json(match.rows);
     },
 
