@@ -14,11 +14,11 @@ const verify = (req, res, next) => {
 };
 
 const isClient = async(req, res, next) => {
-    let client = await pool.query('SELECT role FROM users WHERE user_id = $1', [req.user._id]);
-    if(client.rows[0] == 'client') {
+    let client = await pool.query('SELECT * FROM users WHERE user_id = $1', [req.user._id]);
+    if(client.rows[0].role === 'client') {
         next()
     } else {
-    res.status(403).send('Requires Client Role');
+      res.status(403).send('Requires Client Role');
     }
 };
 
