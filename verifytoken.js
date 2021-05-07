@@ -24,9 +24,12 @@ const isClient = async(req, res, next) => {
 
 
 const isTherapist = async(req, res, next) => {
-    let therapist = await pool.query('SELECT role FROM users WHERE user_id = $1', [req.user._id]);
-    if(therapist.rows == 'therapist') return next();
-    res.status(403).send('Requires Therapist Role')
+    let therapist = await pool.query('SELECT * FROM users WHERE user_id = $1', [req.user._id]);
+    if(therapist.rows[0].role === 'therapist') {
+         next();
+    } else {
+    res.status(403).send('Requires Therapist Role');
+    }
 };
 
 
