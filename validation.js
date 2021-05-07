@@ -32,9 +32,9 @@ const therapistValidation = (data) => {
         lastname: Joi.string().required(),
         age: Joi.string().required(),
         gender: Joi.string().required(),
-        phoneNo: Joi.string().required(),
+        phone_no: Joi.string().required(),
         gender_preference: Joi.string().required(),
-        speciality: Joi.array().required(),
+        specialty: Joi.array().required(),
         state_of_residence: Joi.string().required(),
         client_limit: Joi.string().required()
     };
