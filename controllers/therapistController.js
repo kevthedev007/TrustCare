@@ -11,7 +11,8 @@ const therapistController = {
         //insert into client database
         try {
         const info = await pool.query('INSERT INTO therapists (user_id, firstname, lastname, d_o_b, gender, phone_no, gender_preference, specialty, state_of_residence, about_me) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [req.user._id, firstname, lastname, d_o_b, gender, phone_no, gender_preference, specialty, state_of_residence, about_me]);
-            res.send('successful');
+        const changeStat = await pool.query('UPDATE users SET survey = $1 WHERE user_id = $2', [true, req.user._id])
+        res.send('successful');
         } catch(err) {
             res.send(err)
         }
