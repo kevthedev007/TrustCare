@@ -36,6 +36,7 @@ const therapistValidation = (data) => {
         gender_preference: Joi.string().required(),
         specialty: Joi.array().required(),
         state_of_residence: Joi.string().required(),
+        about_me: Joi.string().required()
     };
     return Joi.validate(data, schema)
 }
